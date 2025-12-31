@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+body {
+  color: #ffffff !important;
+  background: #00212E;
+  
+  /* font-family: "Red Hat Display", ui-sans-serif, system-ui, sans-serif; */
+    font-family: var(--font-red-hat), sans-serif;
+}
+
+@theme {
+  --color-primary: #2F86EB;
+  --color-button-muted: #2563eb;
+  --color-primary-hover: #0082b8;
+
+
+  --color-secondary: #10b981;
+  --color-secondary-hover: #059669;
+  --color-secondary-background: #F2F2F7;
+
+  --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
+
+  --color-bg-page: #f9fafb;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted:#EAECF0;
+
+  --color-text: #00212E;
+  --color-text-muted: #4c5356;
+  --color-subtext-muted: #B5CAD3;
+
+  --color-button-muted:#98D7F3;
+  --color-button-active:#00A3E6;
+  
+  --color-border: #E5E5EA;
+  --color-border-strong: #111827;
+  --color-border-line:#8E8E93;
+  
+  --color-sidebar-background: #f9fafb;
+  --color-sidebar-background-hover: #e5e7eb;
+  --color-sidebar-muted: #B5CAD3;
+  --color-sidebar-active: #00A3E6;
+
+   --color-progress: #EFB31B;
+   --color-progress-muted: #97a3af;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+
+/* Pulsing glow animation */
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.3;
+    filter: blur(100px);
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.5;
+    filter: blur(50px);
+  }
+}
+
+/* Rotate the whole group */
+@keyframes rotateGroup {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Each blob glows individually */
+.glow-blob {
+  animation: glowPulse 5s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* Container for rotating all blobs */
+.rotating-blobs {
+  animation: rotateGroup 1s linear infinite;
+  will-change: transform;
+}
+
+.google-login-wrapper iframe {
+  border-radius: 20% !important; /* adjust as needed */
+  overflow: hidden;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* bounce  */
+@keyframes waveBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+}
+
+.wave-bounce {
+  animation-name: waveBounce;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+
+
+/* .role-error {
+  color: #03d314;
+}
+.role-warning {
+
+  color: #ff9800;
+}
+.role-info {
+  color: #2196f3;
+}
+.role-qa {
+  color: rgb(236, 0, 197);
+}
+.role-designer {
+  color: rgb(24, 107, 202);
+}
+.role-default {
+  color: black;
+} */

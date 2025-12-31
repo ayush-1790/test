@@ -1,0 +1,68 @@
+<%- include('partials/header') %>
+
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Bulk Email Sender</h1>
+        <a href="/history" class="text-blue-600 hover:text-blue-800 font-medium flex items-center transition duration-150 ease-in-out">
+            View History <span class="ml-1">&rarr;</span>
+        </a>
+    </div>
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+        <form action="/send-emails" method="POST" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="subject" class="block text-gray-700 font-bold mb-2">Subject:</label>
+                <input type="text" id="subject" name="subject" required class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150">
+            </div>
+
+            <div class="mb-4">
+                <label for="tags" class="block text-gray-700 font-bold mb-2">Tags (comma-separated):</label>
+                <input type="text" id="tags" name="tags" placeholder="newsletter, promo" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150">
+            </div>
+
+            <div class="mb-4">
+                <label for="message" class="block text-gray-700 font-bold mb-2">Message:</label>
+                <textarea id="message" name="message" rows="5" required class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Tip: Use <code>{{name}}</code> to auto-insert the recipient's name and <code>{{email}}</code> for their email address.</p>
+            </div>
+
+            <div class="mb-4">
+                <label for="emails" class="block text-gray-700 font-bold mb-2">Recipient Emails (one per line or comma-separated):</label>
+                <textarea id="emails" name="emails" rows="5" placeholder="user1@example.com&#10;user2@example.com" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></textarea>
+            </div>
+
+            <div class="mb-6">
+                <label for="emailCsv" class="block text-gray-700 font-bold mb-2">Or upload CSV/Text file:</label>
+                <input type="file" id="emailCsv" name="emailCsv" accept=".csv,.txt" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition duration-150">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded hover:bg-blue-700 transition duration-300 shadow-sm">Send Emails</button>
+        </form>
+    </div>
+
+    <% if (results) { %>
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Sending Results</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-gray-600 font-semibold">Email</th>
+                            <th class="px-4 py-2 text-left text-gray-600 font-semibold">Status</th>
+                            <th class="px-4 py-2 text-left text-gray-600 font-semibold">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+            <% results.forEach(result => { %>
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 text-gray-700"><%= result.email %></td>
+                    <td class="px-4 py-2 font-medium <%= result.status === 'Sent' ? 'text-green-600' : 'text-red-600' %>"><%= result.status %></td>
+                    <td class="px-4 py-2 text-sm text-gray-600"><%= result.error || '' %></td>
+                </tr>
+            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% } %>
+
+<%- include('partials/footer') %>
